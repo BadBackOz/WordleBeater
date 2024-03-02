@@ -1,0 +1,60 @@
+plugins {
+    id 'java'
+}
+
+if(JavaVersion.current() < JavaVersion.VERSION_17){
+    throw new GradleException("This build must be run with Java version 17 or greater")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
+    implementation 'org.seleniumhq.selenium:selenium-java:4.16.1'
+
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-java
+    implementation 'io.cucumber:cucumber-java:7.14.0'
+
+    // https://mvnrepository.com/artifact/io.cucumber/cucumber-testng
+    implementation 'io.cucumber:cucumber-testng:7.14.0'
+
+    // https://mvnrepository.com/artifact/io.cucumber/gherkin
+    implementation 'io.cucumber:gherkin:27.0.0'
+
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    implementation 'commons-io:commons-io:2.15.1'
+
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    implementation 'com.google.code.gson:gson:2.10.1'
+
+}
+
+test{
+    String environment = System.getProperty("env").toString().toLowerCase()
+    String parallelTestCount = System.getProperty("paralleltestcount")
+    Properties props = new Properties()
+    File propsFile = file("src/test/resources/%s.properties".formatted(environment))
+    if (propsFile.isFile()) {
+        propsFile.withInputStream { props.load(it) }
+    }
+    for(prop in props){
+        System.setProperty(prop.getKey().toString(), prop.getValue().toString())
+    }
+
+    if(parallelTestCount == null){
+        parallelTestCount = "1"
+    }
+    System.setProperty("dataproviderthreadcount", parallelTestCount)
+
+    ignoreFailures = true
+    include '**/CucumberTestNGRunner.class'
+    useTestNG(){
+        scanForTestClasses = false
+        useDefaultListeners = true
+
+        systemProperties System.getProperties()
+    }
+}
