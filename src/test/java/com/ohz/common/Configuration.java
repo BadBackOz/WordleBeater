@@ -37,11 +37,19 @@ public class Configuration {
         map.remove("scenario%s".formatted(Thread.currentThread().toString()));
     }
 
+    public static void logWithScreenshot(String textToLog){
+
+        byte[] bytes = ((ChromeDriver)Configuration.getDriver()).getScreenshotAs(OutputType.BYTES);
+        String imageString = Base64.getEncoder().encodeToString(bytes);
+        String screenshotToLog = String.format("<button style='background-color:blue; color:white;' type='button' onClick=displayImage('data:image/png;base64,%s')>View Image</button>", imageString);
+
+        getScenario().log(String.format("%s --- %s",textToLog, screenshotToLog));
+    }
+
     public static void takeAndLogScreenshot(){
-        CustomUtil.wait(400);
         byte[] bytes = ((ChromeDriver)Configuration.getDriver()).getScreenshotAs(OutputType.BYTES);
         String imageString = Base64.getEncoder().encodeToString(bytes);
 
-        Configuration.getScenario().log(String.format("<button type='button' onClick=displayImage('data:image/png;base64,%s')>View Image</button>", imageString));
+        Configuration.getScenario().log(String.format("<button style='background-color:blue; color:white;' type='button' onClick=displayImage('data:image/png;base64,%s')>View Image</button>", imageString));
     }
 }

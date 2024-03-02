@@ -130,15 +130,13 @@ public class SolveWordleHelper {
                     Configuration.getScenario().log("Wordle solved on attempt " + (i + 1));
 
                     endDateTime = LocalDateTime.now();
-                    Configuration.getScenario().log("Seconds to complete Wordle: " + startDateTime.until(endDateTime, ChronoUnit.SECONDS));
-                    Configuration.takeAndLogScreenshot();
+                    Configuration.logWithScreenshot("Seconds to complete Wordle: " + startDateTime.until(endDateTime, ChronoUnit.SECONDS));
 
                     return;
                 } else if (i == 5) {
                     endDateTime = LocalDateTime.now();
                     Configuration.getScenario().log("Failed to solve Wordle");
-                    Configuration.getScenario().log("Seconds to complete Wordle: " + startDateTime.until(endDateTime, ChronoUnit.SECONDS));
-                    Configuration.takeAndLogScreenshot();
+                    Configuration.logWithScreenshot("Seconds to complete Wordle: " + startDateTime.until(endDateTime, ChronoUnit.SECONDS));
                     Assert.fail();
                 }
 

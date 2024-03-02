@@ -33,7 +33,7 @@ public class BaseTestClass {
 	public void launchWordle() {
 		getDriver().get(BASE_URL);
 		getDriver().manage().window().maximize();
-		Configuration.getScenario().log("Launched: %s".formatted(BASE_URL));
+		Configuration.logWithScreenshot("Launched: %s".formatted(BASE_URL));
 	}
 
 }
