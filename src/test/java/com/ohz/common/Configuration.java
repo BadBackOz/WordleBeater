@@ -1,6 +1,5 @@
 package com.ohz.common;
 
-import com.ohz.util.CustomUtil;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
@@ -52,4 +51,5 @@ public class Configuration {
 
         Configuration.getScenario().log(String.format("<button style='background-color:blue; color:white;' type='button' onClick=displayImage('data:image/png;base64,%s')>View Image</button>", imageString));
     }
+
 }
