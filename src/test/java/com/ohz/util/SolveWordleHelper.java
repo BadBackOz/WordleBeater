@@ -68,6 +68,7 @@ public class SolveWordleHelper {
                 boolean isWord = false;
                 while (!isWord) {
                     if (i == 0 && !isStartingWordInvalid) {
+                        //randomWord = Configuration.getExcelData().get("startingWord");
                         randomWord = !"null".equalsIgnoreCase(startingWord) && startingWord.length() == 5 ? startingWord.toUpperCase() : getRandomWord(wordList).toUpperCase();
 
                         homePage.typeWord(randomWord);
@@ -287,7 +288,7 @@ public class SolveWordleHelper {
             }
 
         } catch (Exception e) {
-            System.out.println("Exception thrown: " + e);
+            throw new RuntimeException(e);
         }
 
 

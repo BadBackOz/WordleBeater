@@ -15,13 +15,18 @@ public class BaseTestClass {
 		WebDriver driver = Configuration.getDriver();
 
 		if (driver == null) {
+			ChromeOptions options = new ChromeOptions();
+			//options.addArguments("window-size=1920,1080");
+			options.addArguments("start-maximized");
+			options.addArguments("disable-infobars");
+			options.addArguments("--disable-extensions");
+
 			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 			String scaleFactor = "1";
 			if(screenSize.height < 1080){
 				scaleFactor = "0.67";
 			}
 
-			ChromeOptions options = new ChromeOptions();
 			options.addArguments("force-device-scale-factor=%s".formatted(scaleFactor));
 			driver = new ChromeDriver(options);
 			Configuration.setWebDriver(driver);
@@ -32,7 +37,6 @@ public class BaseTestClass {
 
 	public void launchWordle() {
 		getDriver().get(BASE_URL);
-		getDriver().manage().window().maximize();
 		Configuration.logWithScreenshot("Launched: %s".formatted(BASE_URL));
 	}
 

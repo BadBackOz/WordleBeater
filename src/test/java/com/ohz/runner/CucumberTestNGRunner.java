@@ -7,7 +7,6 @@ import io.cucumber.testng.CucumberOptions;
 import io.cucumber.testng.FeatureWrapper;
 import io.cucumber.testng.PickleWrapper;
 import org.testng.annotations.*;
-
 import java.io.IOException;
 
 @CucumberOptions(
@@ -26,10 +25,11 @@ public class CucumberTestNGRunner extends AbstractTestNGCucumberTests {
     }
 
     @AfterMethod
-    public void afterMethod(){
+    public void afterMethod() throws NoSuchFieldException, IllegalAccessException {
         Configuration.getDriver().quit();
         Configuration.removeWebDriver();
         Configuration.removeScenario();
+        Configuration.removeExcelData();
     }
 
     @AfterSuite

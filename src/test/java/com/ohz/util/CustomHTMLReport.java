@@ -32,7 +32,7 @@ public class CustomHTMLReport {
             h2 {color: #4b615f;}
             table, tr, td, th {border: 1px solid; text-align: left;}
             th {background-color: #D3D3D3;}
-            td {word-wrap:break-word;}
+            td {word-break:break-all;}
             </style>
             </head>
             """;

@@ -30,6 +30,14 @@ dependencies {
     // https://mvnrepository.com/artifact/com.google.code.gson/gson
     implementation 'com.google.code.gson:gson:2.10.1'
 
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation 'org.apache.poi:poi:5.2.5'
+
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation 'org.apache.poi:poi-ooxml:5.2.5'
+
+
+
 }
 
 test{
